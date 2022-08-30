@@ -8,10 +8,9 @@ function getMouseCoords() {
         let x = e.clientX;
         let y = e.clientY;
         // console.log(x,y);
+        $('#mouse-position').html(`( ${x} ), ( ${y} )`);
     });
 }
-
-
 
 
 function readyNow() {
