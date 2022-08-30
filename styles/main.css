@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+}
+
+#runaway-box {
+    position: absolute;
+    box-sizing: border-box;
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+}
