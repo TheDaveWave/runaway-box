@@ -9,7 +9,7 @@ function getMouseCoords() {
         let x = e.clientX;
         let y = e.clientY;
         // console.log(x,y);
-        $('#mouse-position').html(`( ${y} ), ( ${x} )`);
+        $('#mouse-position').html(`( ${x} ), ( ${y} )`);
         let el = $('#runaway-box');
         el.offset({top: el.offset().top,left: el.offset().left});
         console.log(el.offset().top, el.offset().left);
