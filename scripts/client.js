@@ -19,6 +19,8 @@ function getMouseCoords() {
     });
 }
 
+// figure out margin calculationg
+
 // figure out the the mouse is within range of element
 // return true if it is.
 function checkProximity () {
