@@ -15,7 +15,9 @@ body {
     color: white;
     font-size: 10px;
     text-align: center;
-    margin: 10px;
+}
+#box-bounds {
+    margin: 50px;
 }
 
 #mouse-postion {

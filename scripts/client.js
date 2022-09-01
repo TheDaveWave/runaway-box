@@ -16,13 +16,16 @@ function getMouseCoords() {
         
         
         let el = $('#run-away');
-        let elBounding = el.getBoundingClienRect();
+        // let elBounding = el.getBoundingClienRect();
 
         let elBoundLeft = el.outerWidth;
         let elBoundTop = el.outerHeight;
 
-        
+        // console.log(elBounding);
 
+        let el2 = (document).getElementById('box-bounds');
+        let el2Bouding = el2.getBoundingClientRect();
+        console.log(el2Bouding);
 
     });
 }
