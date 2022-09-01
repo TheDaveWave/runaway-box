@@ -14,7 +14,7 @@ function getMouseCoords() {
         let elCoords = el.offset();
         el.html(`( ${elCoords.top} , ${elCoords.left} )`);
         el.offset({top: el.offset().top,left: el.offset().left});
-        console.log(el.offset().top, el.offset().left);
+        // console.log(el.offset().top, el.offset().left);
     });
 }
 
