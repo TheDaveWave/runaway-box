@@ -11,6 +11,8 @@ function getMouseCoords() {
         // console.log(x,y);
         $('#mouse-position').html(`( ${x} ), ( ${y} )`);
         let el = $('#runaway-box');
+        let elCoords = el.offset();
+        el.html(`( ${elCoords.top} , ${elCoords.left} )`);
         el.offset({top: el.offset().top,left: el.offset().left});
         console.log(el.offset().top, el.offset().left);
     });
