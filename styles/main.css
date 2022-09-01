@@ -8,8 +8,8 @@ body {
     height: 50px;
     width: 50px;
     background-color: blue;
-    top: 400px;
-    left: 400px;
+    /* top: 400px;
+    left: 400px; */
 
     /* style element content */
     color: white;

@@ -4,6 +4,8 @@
 $(document).ready(readyNow);
 
 
+const width = $(window).width - 100;
+const height = $(window).height - 100;
 
 function getMouseCoords() {
     addEventListener('mousemove', (e) => {
@@ -13,9 +15,15 @@ function getMouseCoords() {
         $('#mouse-position').html(`( ${x} ), ( ${y} )`);
         let el = $('#runaway-box');
         let elCoords = el.offset();
+
+        let top = Math.random(20) * height;
+        let left = Math.random(20) * width;
+
         el.html(`( ${elCoords.top} , ${elCoords.left} )`);
-        el.offset({top: el.offset().top,left: el.offset().left});
+        // el.offset({top: el.offset().top,left: el.offset().left});
         // console.log(el.offset().top, el.offset().left);
+
+        el.off({top: el.offset().top + top, left: el.offset().left - left});
     });
 }
 
