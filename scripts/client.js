@@ -3,7 +3,6 @@
 
 $(document).ready(readyNow);
 
-let el = $('#runaway-box');
 
 
 function getMouseCoords() {
@@ -12,6 +11,7 @@ function getMouseCoords() {
         let y = e.clientY;
         // console.log(x,y);
         $('#mouse-position').html(`( ${x} ), ( ${y} )`);
+        let el = $('#runaway-box');
         let elCoords = el.offset();
         el.html(`( ${elCoords.top} , ${elCoords.left} )`);
         el.offset({top: el.offset().top,left: el.offset().left});
@@ -22,6 +22,7 @@ function getMouseCoords() {
 // figure out the the mouse is within range of element
 // return true if it is.
 function checkProximity () {
+    let el = $('#runaway-box');
     let elCoords = el.offset();
     
 }
