@@ -59,9 +59,17 @@ function getElementBounds () {
     let el = (document).getElementById('box-bounds');
     let elBounding = el.getBoundingClientRect();
 
+    let elTop = elBounding.top;
+    let elBottom = elBounding.bottom;
+    let elRight = elBounding.right;
+    let elLeft = elBounding.left;
 
     console.log('* Element Bounding: Box-Bounds *');
     console.log(elBounding);
+    console.log('Bounding Top:',elTop);
+    console.log('Bounding Right:',elRight);
+    console.log('Bounding Bottom:',elBottom);
+    console.log('Bounding Left:',elLeft);
 
 }
 
