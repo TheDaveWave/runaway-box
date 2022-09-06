@@ -13,6 +13,7 @@ body {
 
 #box-bounds {
     position: absolute;
+    box-sizing: border-box;
     height: 50px;
     width: 50px;
     margin: 25px;
@@ -22,6 +23,7 @@ body {
 
 #runaway-box {
     position: relative;
+    box-sizing: border-box;
     height: 50px;
     width: 50px;
     background-color: blue;

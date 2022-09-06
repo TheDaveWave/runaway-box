@@ -31,7 +31,7 @@ function getMouseCoords() {
         // console.log(elBounding);
 
         let el2 = (document).getElementById('box-bounds');
-        let el2Bouding = el2.getBoundingClientRect();
+        let el2Bounding = el2.getBoundingClientRect();
 
 
     });
@@ -57,9 +57,11 @@ function runAway() {
 function getElementBounds () {
     
     let el = (document).getElementById('box-bounds');
-    let elBouding = el.getBoundingClientRect();
+    let elBounding = el.getBoundingClientRect();
 
-     console.log(elBouding);
+
+    console.log('* Element Bounding: Box-Bounds *');
+    console.log(elBounding);
 
 }
 
