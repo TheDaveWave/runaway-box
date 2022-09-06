@@ -1,16 +1,21 @@
 /// <reference path="jquery-3.6.0.min.js" />
 
 
-$(document).ready(readyNow);
+$(readyNow);
 
+function readyNow() {
+    console.log('jQuery ready');
+    getMouseCoords();
+}
 
 const width = $(window).width - 100;
 const height = $(window).height - 100;
 
 function getMouseCoords() {
+    // e is shorthand for event.
     addEventListener('mousemove', (e) => {
         let x = e.clientX;
-        let y = e.clientY;
+        let y = e.clientY;g
         // console.log(x,y);
         $('#mouse-position').html(`( ${x} ), ( ${y} )`); 
         
@@ -25,7 +30,8 @@ function getMouseCoords() {
 
         let el2 = (document).getElementById('box-bounds');
         let el2Bouding = el2.getBoundingClientRect();
-        console.log(el2Bouding);
+
+        // console.log(el2Bouding);
 
     });
 }
@@ -53,8 +59,3 @@ function testBS() {
 
 }
 
-
-function readyNow() {
-    console.log('jQuery ready');
-    getMouseCoords();
-}
