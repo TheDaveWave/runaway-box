@@ -7,6 +7,7 @@ function readyNow() {
     getMouseCoords();
     getElementBounds();
     runAway();
+    checkMouseOver();
 }
 
 const width = $(window).width - 100;
@@ -52,6 +53,15 @@ function runAway() {
         // console.log(el.offset().top, el.offset().left);
 
     el.css({top: el.offset().top + top, left: el.offset().left - left});
+}
+
+function checkMouseOver () {
+    let check = false;
+    $('#box-bounds').on('mouseenter', () => {check = true; 
+        console.log('Entered:',check);});
+    $('#box-bounds').on('mouseleave', () => {check = false; 
+        console.log('Exited should be false:',check);});
+    return check;
 }
 
 function getElementBounds () {
