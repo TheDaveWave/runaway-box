@@ -3,26 +3,36 @@ body {
     box-sizing: border-box;
 }
 
-#runaway-box {
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    background-color: blue;
-    /* top: 400px;
-    left: 400px; */
-
-    /* style element content */
-    color: white;
-    font-size: 10px;
-    text-align: center;
-}
-#box-bounds {
-    margin: 50px;
-}
-
 #mouse-postion {
     position: absolute;
     width: fit-content;
     height: fit-content;
     border: black 5px;
+    z-index: 1;
 }
+
+#box-bounds {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    margin: 25px;
+    top: 0;
+    left: 0;
+}
+
+#runaway-box {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+    /* top: 0;
+    left: 0; */
+
+    /* style element content */
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    z-index: auto;
+}
+
+

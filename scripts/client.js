@@ -5,6 +5,8 @@ $(readyNow);
 function readyNow() {
     console.log('jQuery ready');
     getMouseCoords();
+    getElementBounds();
+    runAway();
 }
 
 const width = $(window).width - 100;
@@ -17,6 +19,7 @@ function getMouseCoords() {
         let y = e.clientY;
         // console.log(x,y);
         $('#mouse-position').html(`( ${x} ), ( ${y} )`); 
+        $('#mouse-position').css('z-index', '1');
         
         
         let el = $('#run-away');
@@ -30,7 +33,6 @@ function getMouseCoords() {
         let el2 = (document).getElementById('box-bounds');
         let el2Bouding = el2.getBoundingClientRect();
 
-        console.log(el2Bouding);
 
     });
 }
@@ -52,9 +54,12 @@ function runAway() {
     el.css({top: el.offset().top + top, left: el.offset().left - left});
 }
 
-function testBS() {
+function getElementBounds () {
     
+    let el = (document).getElementById('box-bounds');
+    let elBouding = el.getBoundingClientRect();
 
+     console.log(elBouding);
 
 }
 
