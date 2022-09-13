@@ -13,17 +13,18 @@ body {
 
 #box-bounds {
     position: absolute;
-    /* box-sizing: border-box; /* causes the border to be inside */
-    /* the box for some reason.*/ 
+    /* causes the border to be inside the box*/ 
+    /* box-sizing: border-box; */
     height: 50px;
     width: 50px;
+    border: 25px;
 
     /* temporary styling */
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.075);
 
-    border: 25px;
-    /* mouseenter and mouseleave only trigger on the border in */
+    /* mouseenter and mouseleave only trigger on the border 
+    and inwards (padding, content) */
     margin: 25px;
     top: 0;
     left: 0;
