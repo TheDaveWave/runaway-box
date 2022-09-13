@@ -38,7 +38,7 @@ function getMouseCoords() {
     });
 }
 
-// figure out margin calculationg
+// figure out margin calculation
 
 // figure out if the mouse is within range of element
 // return true if it is.
@@ -55,6 +55,8 @@ function runAway() {
     el.css({top: el.offset().top + top, left: el.offset().left - left});
 }
 
+// checks when mouse enters of leave he boundary box surrounding the
+// runaway box.
 function checkMouseOver () {
     let check = false;
     $('#box-bounds').on('mouseenter', () => {check = true; 
@@ -64,6 +66,7 @@ function checkMouseOver () {
     return check;
 }
 
+// gets the boundaries of the boundary box.
 function getElementBounds () {
     
     let el = (document).getElementById('box-bounds');
