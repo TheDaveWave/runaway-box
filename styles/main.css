@@ -16,6 +16,9 @@ body {
     box-sizing: border-box;
     height: 50px;
     width: 50px;
+    /* border box does not include margin so mouseenter and mouseleave
+        checks  only work on the box's width and height
+        maybe adding a border will trigger the checks?*/
     margin: 25px;
     top: 0;
     left: 0;
