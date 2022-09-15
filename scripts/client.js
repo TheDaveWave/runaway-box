@@ -5,7 +5,7 @@ $(readyNow);
 function readyNow() {
     console.log('jQuery ready');
     getMouseCoords();
-    getElementBounds();
+    // getElementBounds();
     runAway();
     checkMouseOver();
 }
@@ -20,14 +20,7 @@ function getMouseCoords() {
         let y = e.clientY;
         // console.log(x,y);
         $('#mouse-position').html(`( ${x} ), ( ${y} )`); 
-        $('#mouse-position').css('z-index', '1');
-        
-        
-        let el = $('#run-away');
-        // let elBounding = el.getBoundingClienRect();
-
-        let elBoundLeft = el.outerWidth;
-        let elBoundTop = el.outerHeight;
+        getElementBounds(e);
     });
 }
 
@@ -58,22 +51,33 @@ function checkMouseOver () {
 }
 
 // gets the boundaries of the boundary box.
-function getElementBounds () {
+// needs to check which side of the element the mouse is nearest to.
+// needs mouse coords and the position of the edges?
+// needs the distance between the boundaries and the mouse^
+// pass in the mouse event??
+function getElementBounds (mouseEvent) {
     
     let el = (document).getElementById('box-bounds');
     let elBounding = el.getBoundingClientRect();
 
+    let mouseX = mouseEvent.pageX;
+    let mouseY = mouseEvent.pageY;
+    // distance should just be a few calculations using the above and below
+    // variables.
     let elTop = elBounding.top;
     let elBottom = elBounding.bottom;
     let elRight = elBounding.right;
     let elLeft = elBounding.left;
 
-    console.log('* Element Bounding: Box-Bounds *');
-    console.log(elBounding);
-    console.log('Bounding Top:',elTop);
-    console.log('Bounding Right:',elRight);
-    console.log('Bounding Bottom:',elBottom);
-    console.log('Bounding Left:',elLeft);
+
+    
+
+    // console.log('* Element Bounding: Box-Bounds *');
+    // console.log(elBounding);
+    // console.log('Bounding Top:',elTop);
+    // console.log('Bounding Right:',elRight);
+    // console.log('Bounding Bottom:',elBottom);
+    // console.log('Bounding Left:',elLeft);
 
 }
 

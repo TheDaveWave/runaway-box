@@ -12,7 +12,7 @@ body {
 }
 
 #box-bounds {
-    position: absolute;
+    position: fixed;
     /* causes the border to be inside the box*/ 
     /* box-sizing: border-box; */
     height: 50px;
@@ -26,8 +26,8 @@ body {
     /* mouseenter and mouseleave only trigger on the border 
     and inwards (padding, content) */
     /* margin: 25px; */
-    top: 0;
-    left: 0;
+    top: 50px;
+    left: 50px;
 }
 
 #runaway-box {
