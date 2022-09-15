@@ -52,7 +52,7 @@ function checkMouseOver () {
 
 // gets the boundaries of the boundary box.
 // needs to check which side of the element the mouse is nearest to.
-// needs mouse coords and the position of the edges?
+// needs mouse coords and the position of the sides?
 // needs the distance between the boundaries and the mouse^
 // pass in the mouse event??
 function getElementBounds (mouseEvent) {
@@ -69,10 +69,24 @@ function getElementBounds (mouseEvent) {
     let elRight = elBounding.right;
     let elLeft = elBounding.left;
 
-    let distTop = elTop - mouseY;
-    let distBottom = elBottom - mouseY;
-    let distRight = elRight - mouseX;
-    let distLeft = elLeft - mouseX;
+    // calculate the distance from the sides.
+    let distTop = Math.abs(elTop - mouseY);
+    let distBottom = Math.abs(elBottom - mouseY);
+    let distRight = Math.abs(elRight - mouseX);
+    let distLeft = Math.abs(elLeft - mouseX);
+
+    console.log('Distance from top:',distTop);
+    console.log('Distance from bottom:',distBottom);
+    console.log('Distance from right:',distRight);
+    console.log('Distance from left:',distLeft);
+
+    let distMin = Math.min(distTop,distBottom,distRight,distLeft);
+    console.log('******************');
+    // should give us the value of the closest side.
+    console.log('Min:',distMin);
+
+
+    
 
     // console.log('* Element Bounding: Box-Bounds *');
     // console.log(elBounding);
@@ -80,6 +94,7 @@ function getElementBounds (mouseEvent) {
     // console.log('Bounding Right:',elRight);
     // console.log('Bounding Bottom:',elBottom);
     // console.log('Bounding Left:',elLeft);
+
 
 }
 
