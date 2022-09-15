@@ -28,13 +28,6 @@ function getMouseCoords() {
 
         let elBoundLeft = el.outerWidth;
         let elBoundTop = el.outerHeight;
-
-        // console.log(elBounding);
-
-        let el2 = (document).getElementById('box-bounds');
-        let el2Bounding = el2.getBoundingClientRect();
-
-
     });
 }
 
