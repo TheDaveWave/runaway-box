@@ -81,7 +81,7 @@ function getElementBounds (mouseEvent) {
     // console.log('Distance from left:',distLeft);
 
     let distMin = Math.min(distTop,distBottom,distRight,distLeft);
-    console.log('******************');
+    // console.log('******************');
     // should give us the value of the closest side.
     // console.log('Min:',distMin);
 
@@ -107,9 +107,10 @@ function getElementBounds (mouseEvent) {
 
     // for some reason if you are far enough from the bottom or top
     // it logs the left or right respectively.
+    console.log('***** Closest Side *****');
     console.log(side);
 
-    
+
     // console.log('* Element Bounding: Box-Bounds *');
     // console.log(elBounding);
     // console.log('Bounding Top:',elTop);
