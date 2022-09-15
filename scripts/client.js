@@ -69,8 +69,10 @@ function getElementBounds (mouseEvent) {
     let elRight = elBounding.right;
     let elLeft = elBounding.left;
 
-
-    
+    let distTop = elTop - mouseY;
+    let distBottom = elBottom - mouseY;
+    let distRight = elRight - mouseX;
+    let distLeft = elLeft - mouseX;
 
     // console.log('* Element Bounding: Box-Bounds *');
     // console.log(elBounding);
