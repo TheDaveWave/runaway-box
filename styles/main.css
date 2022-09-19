@@ -11,8 +11,16 @@ body {
     z-index: 1;
 }
 
+#container {
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    border: 1px solid brown;
+    overflow: hidden;
+}
+
 #box-bounds {
-    position: fixed;
+    position: absolute;
     /* causes the border to be inside the box*/ 
     /* box-sizing: border-box; */
     height: 50px;
