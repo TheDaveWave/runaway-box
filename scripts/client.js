@@ -5,7 +5,9 @@ $(readyNow);
 function readyNow() {
     console.log('jQuery ready');
     // getMouseCoords();
-    $('#box-bounds').on('mouseenter', getElementBounds);
+    $('#box-bounds').on('mouseenter', function(event){
+        getElementBounds(event);
+    });
     // getElementBounds();
     // runAway();
     // checkMouseOver();
@@ -56,74 +58,72 @@ function checkMouseOver () {
 // needs mouse coords and the position of the sides?
 // needs the distance between the boundaries and the mouse^
 // pass in the mouse event??
-function getElementBounds () {
+function getElementBounds (mouse) {
 
-    addEventListener('mousemove', (mouse) => {
-        let el = (document).getElementById('box-bounds');
-        let elBounding = el.getBoundingClientRect();
+    let el = (document).getElementById('box-bounds');
+    let elBounding = el.getBoundingClientRect();
 
-        let mouseX = mouse.pageX;
-        let mouseY = mouse.pageY;
+    let mouseX = mouse.pageX;
+    let mouseY = mouse.pageY;
 
-        // distance should just be a few calculations using the above and below
-        // variables.
-        let elTop = elBounding.top;
-        let elBottom = elBounding.bottom;
-        let elRight = elBounding.right;
-        let elLeft = elBounding.left;
+    // distance should just be a few calculations using the above and below
+    // variables.
+    let elTop = elBounding.top;
+    let elBottom = elBounding.bottom;
+    let elRight = elBounding.right;
+    let elLeft = elBounding.left;
 
-        // calculate the distance from the sides.
-        let distTop = Math.abs(elTop - mouseY);
-        let distBottom = Math.abs(elBottom - mouseY);
-        let distRight = Math.abs(elRight - mouseX);
-        let distLeft = Math.abs(elLeft - mouseX);
+    // calculate the distance from the sides.
+    let distTop = Math.abs(elTop - mouseY);
+    let distBottom = Math.abs(elBottom - mouseY);
+    let distRight = Math.abs(elRight - mouseX);
+    let distLeft = Math.abs(elLeft - mouseX);
 
-        // console.log('Distance from top:',distTop);
-        // console.log('Distance from bottom:',distBottom);
-        // console.log('Distance from right:',distRight);
-        // console.log('Distance from left:',distLeft);
+    // console.log('Distance from top:',distTop);
+    // console.log('Distance from bottom:',distBottom);
+    // console.log('Distance from right:',distRight);
+    // console.log('Distance from left:',distLeft);
 
-        let distMin = Math.min(distTop,distBottom,distRight,distLeft);
-        // console.log('******************');
-        // should give us the value of the closest side.
-        // console.log('Min:',distMin);
+    let distMin = Math.min(distTop,distBottom,distRight,distLeft);
+    // console.log('******************');
+    // should give us the value of the closest side.
+    // console.log('Min:',distMin);
 
-        // log what side is the closest.
-        let side = '';
+    // log what side is the closest.
+    let side = '';
 
-        switch (distMin) {
-            case distTop:
-                side = "Top";
-                break;
-            case distBottom:
-                side = "Bottom";
-                break;
-            case distLeft:
-                side = "Left";
-                break;
-            case distRight:
-                side = "Right";
-                break;
-            default:
-                console.log("error");
-        }
+    switch (distMin) {
+        case distTop:
+            side = "Top";
+            break;
+        case distBottom:
+            side = "Bottom";
+            break;
+        case distLeft:
+            side = "Left";
+            break;
+        case distRight:
+            side = "Right";
+            break;
+        default:
+            console.log("error");
+    }
 
-        // for some reason if you are far enough from the bottom or top
-        // it logs the left or right respectively.
-        console.log('***** Closest Side *****');
-        console.log(side);
+    // for some reason if you are far enough from the bottom or top
+    // it logs the left or right respectively.
+    console.log('***** Closest Side *****');
+    console.log(side);
 
 
-        // console.log('* Element Bounding: Box-Bounds *');
-        // console.log(elBounding);
-        // console.log('Bounding Top:',elTop);
-        // console.log('Bounding Right:',elRight);
-        // console.log('Bounding Bottom:',elBottom);
-        // console.log('Bounding Left:',elLeft);
-        
-        moveBox(side, mouse);
-    // return side;
-    });
+    // console.log('* Element Bounding: Box-Bounds *');
+    // console.log(elBounding);
+    // console.log('Bounding Top:',elTop);
+    // console.log('Bounding Right:',elRight);
+    // console.log('Bounding Bottom:',elBottom);
+    // console.log('Bounding Left:',elLeft);
+    
+    moveBox(side, mouse);
+// return side;
 
 }
 
@@ -149,7 +149,7 @@ function moveBox(side, mouseEvent) {
             // if mouse enters the border move the box
             // away from top.
             el.css({
-               top: mouse.pageY + 20
+               top: mouse.pageY + 10
             });
             break;
         case 'Bottom':
@@ -163,7 +163,7 @@ function moveBox(side, mouseEvent) {
             // if mouse enters the border move box
             // away from the left.
             el.css({
-                left: mouse.pageX + 20
+                left: mouse.pageX + 10
             });
             break;
         case 'Right':
