@@ -126,16 +126,20 @@ function moveBox(side) {
 
     switch(side) {
         case 'Top':
-            // something
+            // if mouse enters the border move the box
+            // away from top.
             break;
         case 'Bottom':
-            // something
+            // if mouse enters the border move box
+            // towards the top.
             break;
         case 'Left':
-            // something
+            // if mouse enters the border move box
+            // away from the left.
             break;
         case 'Right':
-            // something
+            // if mouse enters the border move box
+            // toward the left.
             break;
         defualt:
             console.log('Error getting side');
