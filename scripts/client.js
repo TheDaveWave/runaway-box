@@ -121,7 +121,7 @@ function getElementBounds (mouseEvent) {
     // return side;
 }
 
-// move the box depeding on which side the mouse is closest to.
+// move the box relative to which side the mouse is closest to.
 function moveBox(side) {
 
     switch(side) {
