@@ -117,6 +117,28 @@ function getElementBounds (mouseEvent) {
     // console.log('Bounding Right:',elRight);
     // console.log('Bounding Bottom:',elBottom);
     // console.log('Bounding Left:',elLeft);
+    return side;
+}
+
+// move the box depeding on which side the mouse is closest to.
+function moveBox(side) {
+
+    switch(side) {
+        case 'Top':
+            // something
+            break;
+        case 'Bottom':
+            // something
+            break;
+        case 'Left':
+            // something
+            break;
+        case 'Right':
+            // something
+            break;
+        defualt:
+            console.log('Error getting side');
+    }
 
 }
 
