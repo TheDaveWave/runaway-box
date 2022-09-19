@@ -20,7 +20,7 @@ body {
 }
 
 #box-bounds {
-    position: absolute;
+    position: relative;
     /* causes the border to be inside the box*/ 
     /* box-sizing: border-box; */
     height: 50px;
@@ -29,6 +29,7 @@ body {
 
     /* temporary styling */
     border-style: solid;
+    /* border-color: transparent; */
     border-color: rgba(0, 0, 0, 0.075);
 
     /* mouseenter and mouseleave only trigger on the border 
@@ -36,6 +37,7 @@ body {
     /* margin: 25px; */
     top: 50px;
     left: 50px;
+    /* transition: 0.5s; */
 }
 
 #runaway-box {

@@ -13,8 +13,8 @@ function readyNow() {
     // checkMouseOver();
 }
 
-const width = $(window).width - 100;
-const height = $(window).height - 100;
+// const width = $(window).width - 100;
+// const height = $(window).height - 100;
 
 function getMouseCoords() {
     // e is shorthand for event.
