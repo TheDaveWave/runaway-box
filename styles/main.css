@@ -31,6 +31,9 @@ cannot be touched by the mouse/cursor by using a border*/
     and inwards (padding and content, not margin) */
     top: 200px;
     left: 200px;
+
+    /* for transition property: in function moveBox() change
+    the amount the box moves to make transition actually cool */
     /* transition: 0.2s; */
 }
 
