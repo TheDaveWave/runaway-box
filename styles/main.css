@@ -10,8 +10,8 @@ does not work at the moment */
     margin: 0 auto;
     width: 100vw;
     height: 100vh;
-    border: 1px solid brown;
-    overflow: hidden;
+    border: 1px dotted red;
+    /* overflow: hidden; */
 }
 
 /* set the styling for the box bounds so the runaway box
@@ -31,7 +31,7 @@ cannot be touched by the mouse/cursor by using a border*/
     and inwards (padding and content, not margin) */
     top: 50px;
     left: 50px;
-    /* transition: 0.5s; */
+    /* transition: 0.2s; */
 }
 
 /* style the runaway box */
