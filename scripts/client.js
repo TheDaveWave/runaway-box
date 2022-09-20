@@ -9,6 +9,9 @@ function readyNow() {
     });
 }
 
+// will need to get the position of the box and makes sure it does not 
+// go past (0,0), (0, max height), (max width, 0), (max width, max height).
+
 // gets the boundaries of the boundary box.
 // needs to check which side of the element the mouse is nearest to, 
 // by calculating the distance between the boundaries/sides and the mouse.

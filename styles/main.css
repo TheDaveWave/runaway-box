@@ -29,8 +29,8 @@ cannot be touched by the mouse/cursor by using a border*/
 
     /* mouseenter and mouseleave only trigger on the border 
     and inwards (padding and content, not margin) */
-    top: 50px;
-    left: 50px;
+    top: 200px;
+    left: 200px;
     /* transition: 0.2s; */
 }
 
