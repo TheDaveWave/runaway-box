@@ -8,13 +8,7 @@ function readyNow() {
     $('#box-bounds').on('mouseenter', function(event){
         getElementBounds(event);
     });
-    // getElementBounds();
-    // runAway();
-    // checkMouseOver();
 }
-
-// const width = $(window).width - 100;
-// const height = $(window).height - 100;
 
 function getMouseCoords() {
     // e is shorthand for event.
@@ -27,20 +21,7 @@ function getMouseCoords() {
     });
 }
 
-function runAway() {
-    let el = $('#runaway-box');
-    let elCoords = el.offset();
-    let top = Math.random(20) * height;
-    let left = Math.random(20) * width;
-
-    el.html(`( ${elCoords.top} , ${elCoords.left} )`);
-        // el.offset({top: el.offset().top,left: el.offset().left});
-        // console.log(el.offset().top, el.offset().left);
-
-    el.css({top: el.offset().top + top, left: el.offset().left - left});
-}
-
-// figure out if the mouse is within range of element
+// check if the mouse is within range of element
 // return true if it is.
 // checks when mouse enters of leave he boundary box surrounding the
 // runaway box.
@@ -54,44 +35,44 @@ function checkMouseOver () {
 }
 
 // gets the boundaries of the boundary box.
-// needs to check which side of the element the mouse is nearest to.
-// needs mouse coords and the position of the sides?
-// needs the distance between the boundaries and the mouse^
-// pass in the mouse event??
+// needs to check which side of the element the mouse is nearest to, 
+// by calculating the distance between the boundaries/sides and the mouse.
+// passes in the mouse event as a parameter.
 function getElementBounds (mouse) {
 
+    // Have to use vanilla JS to get the box bounds 
+    // getBoundingClientRect() 
     let el = (document).getElementById('box-bounds');
     let elBounding = el.getBoundingClientRect();
 
+    // get the X and Y position of the mouse/cursor on the page.
     let mouseX = mouse.pageX;
     let mouseY = mouse.pageY;
 
-    // distance should just be a few calculations using the above and below
-    // variables.
+    // distance should just be a few calculations using the 
+    // above and below variables.
     let elTop = elBounding.top;
     let elBottom = elBounding.bottom;
     let elRight = elBounding.right;
     let elLeft = elBounding.left;
 
-    // calculate the distance from the sides.
+    // calculate the distance from the sides and store
+    // them in what I will call distance variables.
     let distTop = Math.abs(elTop - mouseY);
     let distBottom = Math.abs(elBottom - mouseY);
     let distRight = Math.abs(elRight - mouseX);
     let distLeft = Math.abs(elLeft - mouseX);
 
-    // console.log('Distance from top:',distTop);
-    // console.log('Distance from bottom:',distBottom);
-    // console.log('Distance from right:',distRight);
-    // console.log('Distance from left:',distLeft);
-
+    // get the minimum distance or one of the four distance variables
+    // that has the shortest distance at any given time.
     let distMin = Math.min(distTop,distBottom,distRight,distLeft);
-    // console.log('******************');
-    // should give us the value of the closest side.
-    // console.log('Min:',distMin);
 
-    // log what side is the closest.
+    // set side equal to an empty string.
     let side = '';
 
+    // use a switch statement to see which dsitance variable 
+    // is the closest and assign the side variable a string 
+    // with the respective side.
     switch (distMin) {
         case distTop:
             side = "Top";
@@ -109,22 +90,12 @@ function getElementBounds (mouse) {
             console.log("error");
     }
 
-    // for some reason if you are far enough from the bottom or top
-    // it logs the left or right respectively.
-    console.log('***** Closest Side *****');
-    console.log(side);
+    // console.log('***** Closest Side *****');
+    // console.log(side);
 
-
-    // console.log('* Element Bounding: Box-Bounds *');
-    // console.log(elBounding);
-    // console.log('Bounding Top:',elTop);
-    // console.log('Bounding Right:',elRight);
-    // console.log('Bounding Bottom:',elBottom);
-    // console.log('Bounding Left:',elLeft);
-    
+    // call move box, passing in side and mouse 
+    // event as parameters.
     moveBox(side, mouse);
-// return side;
-
 }
 
 // move the box relative to which side the mouse is closest to.
