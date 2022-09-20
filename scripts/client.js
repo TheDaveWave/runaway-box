@@ -3,35 +3,10 @@
 $(readyNow);
 
 function readyNow() {
-    console.log('jQuery ready');
-    // getMouseCoords();
+    // handle events.
     $('#box-bounds').on('mouseenter', function(event){
         getElementBounds(event);
     });
-}
-
-function getMouseCoords() {
-    // e is shorthand for event.
-    addEventListener('mousemove', (e) => {
-        let x = e.clientX;
-        let y = e.clientY;
-        // console.log(x,y);
-        $('#mouse-position').html(`( ${x} ), ( ${y} )`); 
-        getElementBounds(e);
-    });
-}
-
-// check if the mouse is within range of element
-// return true if it is.
-// checks when mouse enters of leave he boundary box surrounding the
-// runaway box.
-function checkMouseOver () {
-    let check = false;
-    $('#box-bounds').on('mouseenter', () => {check = true; 
-        console.log('Entered:',check);});
-    $('#box-bounds').on('mouseleave', () => {check = false; 
-        console.log('Exited should be false:',check);});
-    return check;
 }
 
 // gets the boundaries of the boundary box.
@@ -110,11 +85,12 @@ function moveBox(side, mouseEvent) {
     let width = el.outerWidth();
     let height = el.outerHeight();
 
-    // get Mouse position.
-    // let mouseX = mouseEvent.pageX;
-    // let mouseY = mouseEvent.pageY;
+    // get the X and Y position of the mouse on the page.
+    let mouseX = mouseEvent.pageX;
+    let mouseY = mouseEvent.pageY;
 
-
+    // check which side the mouse/cursor is on and
+    // move the box accordingly.
     switch(side) {
         case 'Top':
             // if mouse enters the border move the box
@@ -147,6 +123,29 @@ function moveBox(side, mouseEvent) {
         defualt:
             console.log('Error getting side');
     }
-
 }
 
+// display the X and Y position of the mouse on a div,
+// can be used for testing purposes.
+function getMouseCoords() {
+    // e is shorthand for event.
+    addEventListener('mousemove', (e) => {
+        let x = e.clientX;
+        let y = e.clientY;
+        // console.log(x,y);
+        $('#mouse-position').html(`( ${x} ), ( ${y} )`); 
+        getElementBounds(e);
+    });
+}
+
+// check if the mouse is within range of element return true if it is.
+// checks when mouse enters of leaves the boundary box surrounding the
+// runaway box. Used for testing purposes.
+function checkMouseOver () {
+    let check = false;
+    $('#box-bounds').on('mouseenter', () => {check = true; 
+        console.log('Entered:',check);});
+    $('#box-bounds').on('mouseleave', () => {check = false; 
+        console.log('Exited should be false:',check);});
+    return check;
+}
