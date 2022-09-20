@@ -3,14 +3,9 @@ body {
     box-sizing: border-box;
 }
 
-#mouse-postion {
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    border: black 5px;
-    z-index: 1;
-}
-
+/* trying to use a container to make it so the runaway box
+and its bounds do not leave the page.
+does not work at the moment */
 #container {
     margin: 0 auto;
     width: 100vw;
@@ -19,10 +14,10 @@ body {
     overflow: hidden;
 }
 
+/* set the styling for the box bounds so the runaway box
+cannot be touched by the mouse/cursor by using a border*/
 #box-bounds {
     position: relative;
-    /* causes the border to be inside the box*/ 
-    /* box-sizing: border-box; */
     height: 50px;
     width: 50px;
     border: 25px;
@@ -33,27 +28,25 @@ body {
     border-color: rgba(0, 0, 0, 0.075);
 
     /* mouseenter and mouseleave only trigger on the border 
-    and inwards (padding, content) */
-    /* margin: 25px; */
+    and inwards (padding and content, not margin) */
     top: 50px;
     left: 50px;
     /* transition: 0.5s; */
 }
 
+/* style the runaway box */
 #runaway-box {
-    position: relative;
-    box-sizing: border-box;
     height: 50px;
     width: 50px;
     background-color: blue;
-    /* top: 0;
-    left: 0; */
-
-    /* style element content */
-    color: white;
-    font-size: 10px;
-    text-align: center;
-    z-index: auto;
 }
 
-
+/* For displaying mouse position with
+getMouseCoords() function in client.js */
+/* #mouse-postion {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    border: black 5px;
+    z-index: 1;
+} */
