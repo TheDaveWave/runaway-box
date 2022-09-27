@@ -26,14 +26,14 @@ function getDocumentBorder() {
         d.body.scrollWidth,
         d.body.offsetWidth, 
         d.documentElement.offsetWidth,
-        d.documentElement.clientWidth);
+        d.documentElement.clientWidth) - 50;
     // get the max height.
     let docY = Math.max(
         d.documentElement.scrollHeight,
         d.body.scrollHeight,
         d.body.offsetHeight,
         d.documentElement.offsetHeight,
-        d.documentElement.clientHeight);
+        d.documentElement.clientHeight) - 50;
 
     console.log(docX, docY);
     
