@@ -3,6 +3,8 @@
 $(readyNow);
 
 function readyNow() {
+    
+    getDocumentBorder();
     // handle events.
     $('#box-bounds').on('mouseenter', function(event){
         getElementBounds(event);
@@ -11,6 +13,32 @@ function readyNow() {
 
 // will need to get the position of the box and makes sure it does not 
 // go past (0,0), (0, max height), (max width, 0), (max width, max height).
+
+// gets the bounds of the page to keep the box from trailing off the page.
+function getDocumentBorder() {
+
+    let d = document;
+
+    // get the max width using math.max on every possible way to get the width
+    // to improve compatability with different browsers.
+    let docX = Math.max(
+        d.documentElement.scrollWidth,
+        d.body.scrollWidth,
+        d.body.offsetWidth, 
+        d.documentElement.offsetWidth,
+        d.documentElement.clientWidth);
+    // get the max height.
+    let docY = Math.max(
+        d.documentElement.scrollHeight,
+        d.body.scrollHeight,
+        d.body.offsetHeight,
+        d.documentElement.offsetHeight,
+        d.documentElement.clientHeight);
+
+    console.log(docX, docY);
+    
+}
+
 
 // gets the boundaries of the boundary box.
 // needs to check which side of the element the mouse is nearest to, 
