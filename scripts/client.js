@@ -134,19 +134,13 @@ function moveBox(side, mouseEvent) {
     let elPos = el.position()
     console.log(elPos);
 
-    switch(elPos){
-        case elPos.top >= boundary.docuHeight || elPos.left >= boundary.docuWidth:
-            el.css({
-                top: boundary.docuHeight/2,
-                left: boundary.docuWidth/2
-            });
-            break;
-        case elPos.top <= 0 || elPos.left <= 0:
-            el.css({
-                top: boundary.docuHeight/2,
-                left: boundary.docuWidth/2
-            });
-            break;
+    // somehow stop being affected by cursor.
+    if(elPos.top <= 0 || elPos.left <= 0 || elPos.top >= boundary.docuHeight || elPos.left >= boundary.docuWidth) {
+        console.log('coolness');
+        el.css({
+            top: boundary.docuHeight/2,
+            left: boundary.docuWidth/2
+        });
     }
 
     // check which side the mouse/cursor is on and
