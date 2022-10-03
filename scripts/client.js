@@ -126,23 +126,6 @@ function moveBox(side, mouseEvent) {
     // let mouseX = mouseEvent.pageX;
     // let mouseY = mouseEvent.pageY;
 
-    // get the document boundary.
-    let boundary = getDocumentBorder();
-    // console.log(boundary);
-
-    // get the elements position.
-    let elPos = el.position()
-    console.log(elPos);
-
-    // somehow stop being affected by cursor.
-    if(elPos.top <= 0 || elPos.left <= 0 || elPos.top >= boundary.docuHeight || elPos.left >= boundary.docuWidth) {
-        console.log('coolness');
-        el.css({
-            top: boundary.docuHeight/2,
-            left: boundary.docuWidth/2
-        });
-    }
-
     // check which side the mouse/cursor is on and
     // move the box accordingly.
     switch(side) {
@@ -177,6 +160,24 @@ function moveBox(side, mouseEvent) {
         defualt:
             console.log('Error getting side');
     }
+
+
+     // get the document boundary.
+     let boundary = getDocumentBorder();
+     // console.log(boundary);
+ 
+     // get the elements position.
+     let elPos = el.position()
+     console.log(elPos);
+ 
+     // somehow stop being affected by cursor.
+     if(elPos.top <= 0 || elPos.left <= 0 || elPos.top >= boundary.docuHeight || elPos.left >= boundary.docuWidth) {
+         console.log('coolness');
+         el.css({
+             top: boundary.docuHeight/2,
+             left: boundary.docuWidth/2
+         });
+     }
 }
 
 // display the X and Y position of the mouse on a div,
