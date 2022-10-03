@@ -36,7 +36,13 @@ function getDocumentBorder() {
         d.documentElement.clientHeight) - 50;
 
     console.log(docX, docY);
+
+    const boundary = {
+        docuWidth: docX,
+        docuHeight: docY
+    }
     
+    return boundary;
 }
 
 
@@ -112,13 +118,36 @@ function moveBox(side, mouseEvent) {
 
     // get the width and height of the boundary box
     // so we can move box knowing how getBoundingClientRect()
-    // diagram.
+    // diagram works.
     let width = el.outerWidth();
     let height = el.outerHeight();
 
     // get the X and Y position of the mouse on the page.
-    let mouseX = mouseEvent.pageX;
-    let mouseY = mouseEvent.pageY;
+    // let mouseX = mouseEvent.pageX;
+    // let mouseY = mouseEvent.pageY;
+
+    // get the document boundary.
+    let boundary = getDocumentBorder();
+    // console.log(boundary);
+
+    // get the elements position.
+    let elPos = el.position()
+    console.log(elPos);
+
+    switch(elPos){
+        case elPos.top >= boundary.docuHeight || elPos.left >= boundary.docuWidth:
+            el.css({
+                top: boundary.docuHeight/2,
+                left: boundary.docuWidth/2
+            });
+            break;
+        case elPos.top <= 0 || elPos.left <= 0:
+            el.css({
+                top: boundary.docuHeight/2,
+                left: boundary.docuWidth/2
+            });
+            break;
+    }
 
     // check which side the mouse/cursor is on and
     // move the box accordingly.
