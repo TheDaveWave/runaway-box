@@ -3,9 +3,23 @@
     overflow: none;
 } */
 
-body {
+/* body {
     margin: 5px;
-    box-sizing: border-box;
+    box-sizing: border-box; */
+    /* height: 100%;
+    width: 100%; */
+    /* max-width: 950px;
+    max-height: 900px;
+} */
+
+html, body {
+    position: relative;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 /* trying to use a container to make it so the runaway box
