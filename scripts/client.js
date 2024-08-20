@@ -3,6 +3,7 @@
 $(readyNow);
 
 function readyNow() {
+  getDarkMode();
   getDocumentBorder();
   // handle events.
   $("#box-bounds").on("mouseenter", function (event) {
@@ -11,6 +12,17 @@ function readyNow() {
   $("#box-bounds").on("touchmove", function(event) {
     getElementBounds(event);
   });
+}
+
+function getDarkMode() {
+  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if(isDarkMode) {
+    document.body.classList.add('dark-mode')
+    document.getElementById("runaway-box").classList.add('dark-box')
+  } else {
+    document.body.classList.remove('dark-mode')
+    document.getElementById("runaway-box").classList.remove('dark-box')
+  }
 }
 
 // will need to get the position of the box and makes sure it does not

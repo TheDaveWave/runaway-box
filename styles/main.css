@@ -22,6 +22,10 @@ html, body {
     overflow: hidden;
 }
 
+.dark-mode {
+    background-color: #3C3C3C;
+}
+
 /* trying to use a container to make it so the runaway box
 and its bounds do not leave the page.
 does not work at the moment */
@@ -29,7 +33,7 @@ does not work at the moment */
     margin: 0 auto;
     width: 100vw;
     height: 100vh;
-    border: 1px dotted red;
+    /* border: 1px dotted red; */
     /* overflow: hidden; */
 }
 
@@ -61,6 +65,10 @@ cannot be touched by the mouse/cursor by using a border*/
     height: 50px;
     width: 50px;
     background-color: blue;
+}
+
+.dark-box {
+    background-color: green !important;
 }
 
 /* For displaying mouse position with
