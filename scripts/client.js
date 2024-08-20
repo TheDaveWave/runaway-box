@@ -8,6 +8,9 @@ function readyNow() {
   $("#box-bounds").on("mouseenter", function (event) {
     getElementBounds(event);
   });
+  $("#box-bounds").on("touchmove", function(event) {
+    getElementBounds(event);
+  });
 }
 
 // will need to get the position of the box and makes sure it does not
@@ -63,6 +66,11 @@ function getElementBounds(mouse) {
   // getBoundingClientRect()
   let el = document.getElementById("box-bounds");
   let elBounding = el.getBoundingClientRect();
+
+  // Trying to handle the mobile touch events.
+  if(Array.isArray(mouse)) {
+    mouse = mouse[0];
+  }
 
   // get the X and Y position of the mouse/cursor on the page.
   let mouseX = mouse.pageX;
