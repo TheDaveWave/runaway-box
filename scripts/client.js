@@ -15,6 +15,7 @@ function onReady(event) {
     getElementBounds(event);
   });
 }
+
 // // Function to set the app's mode to the mode the user has selected: dark or light.
 // function setDarkMode() {
 //   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({matches}) => {
