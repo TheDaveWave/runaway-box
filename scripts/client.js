@@ -1,27 +1,43 @@
-/// <reference path="jquery-3.6.0.min.js" />
+// Vanilla JS solution to running functions on document ready.
+document.addEventListener("DOMContentLoaded", (event) => onReady(event));
 
-$(readyNow);
-
-function readyNow() {
+// Functions to run on Document load.
+function onReady(event) {
   getDarkMode();
-  getDocumentBorder();
-  // handle events.
-  $("#box-bounds").on("mouseenter", function (event) {
+  const border = getDocumentBorder();
+  console.log(`Document Border - x: ${border.docuWidth}, y: ${border.docuHeight}`)
+
+  const box = document.getElementById("box-bounds");
+  box.addEventListener("mouseenter", function (event) {
     getElementBounds(event);
   });
-  $("#box-bounds").on("touchmove", function(event) {
+  box.addEventListener("touchmove", function (event) {
     getElementBounds(event);
   });
 }
 
+// Function to set the app's mode to the mode the user has selected: dark or light.
+function setDarkMode() {
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({matches}) => {
+    if(matches) {
+      document.body.classList.add('dark-mode');
+      document.getElementById("runaway-box").classList.add('dark-box');
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.getElementById("runaway-box").classList.remove('dark-box');
+    }
+  })
+}
+
+// Function to set the app's mode to the mode the user has selected: dark or light.
 function getDarkMode() {
   const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   if(isDarkMode) {
-    document.body.classList.add('dark-mode')
-    document.getElementById("runaway-box").classList.add('dark-box')
+    document.body.classList.add('dark-mode');
+    document.getElementById("runaway-box").classList.add('dark-box');
   } else {
-    document.body.classList.remove('dark-mode')
-    document.getElementById("runaway-box").classList.remove('dark-box')
+    document.body.classList.remove('dark-mode');
+    document.getElementById("runaway-box").classList.remove('dark-box');
   }
 }
 
@@ -33,8 +49,7 @@ function getDocumentBorder() {
   let d = document;
   let elBounds = d.getElementById("box-bounds").getBoundingClientRect();
 
-  // still debating on subtracting these from the docX and docY here instead of the
-  // check in the moveBox function.
+  // still debating on subtracting these from the docX and docY here instead of the check in the moveBox function.
   let boxWidth = elBounds.width;
   let boxHeight = elBounds.height;
 
@@ -59,8 +74,7 @@ function getDocumentBorder() {
     d.documentElement.clientHeight
   );
 
-  console.log(docX, docY);
-
+  // console.log(docX, docY);
   const boundary = {
     docuWidth: docX,
     docuHeight: docY,
@@ -140,14 +154,18 @@ function getElementBounds(mouse) {
 // move the box relative to which side the mouse is closest to it.
 function moveBox(side, mouseEvent) {
   // get the boundaries of the bounary box.
-  let el = $("#box-bounds");
+  // let el = $("#box-bounds");
+  let el = document.getElementById('box-bounds');
+  console.log("----- moveBox ----")
+  let elBoundary = el.getBoundingClientRect();
   let mouse = mouseEvent;
 
   // get the width and height of the boundary box
-  // so we can move box knowing how getBoundingClientRect()
-  // diagram works.
-  let width = el.outerWidth();
-  let height = el.outerHeight();
+  // so we can move box knowing how getBoundingClientRect() diagram works.
+  // let width = el.outerWidth();
+  // let height = el.outerHeight();
+  let width = elBoundary.width;
+  let height = elBoundary.height;
 
   // get the X and Y position of the mouse on the page.
   // let mouseX = mouseEvent.pageX;
@@ -157,34 +175,38 @@ function moveBox(side, mouseEvent) {
   // move the box accordingly.
   switch (side) {
     case "Top":
-      // if mouse enters the border move the box
-      // away from top.
-      el.css({
-        top: mouse.pageY + 10,
-      });
+      // if mouse enters the border move the box away from top.
+      el.style.setProperty("top", String(mouse.pageY + 10) +"px")
+
+      // el.css({
+      //   top: mouse.pageY + 10,
+      // });
       break;
     case "Bottom":
-      // if mouse enters the border move box
-      // towards the top.
-      el.css({
-        top: mouse.pageY - height - 20,
-      });
+      // if mouse enters the border move box towards the top.
+      el.style.setProperty("top", String(mouse.pageY - height - 20) +"px")
+
+      // el.css({
+      //   top: mouse.pageY - height - 20,
+      // });
       break;
     case "Left":
-      // if mouse enters the border move box
-      // away from the left.
-      el.css({
-        left: mouse.pageX + 10,
-      });
+      // if mouse enters the border move box away from the left.
+      el.style.setProperty("left", String(mouse.pageX + 10) +"px")
+
+      // el.css({
+      //   left: mouse.pageX + 10,
+      // });
       break;
     case "Right":
-      // if mouse enters the border move box
-      // toward the left.
-      el.css({
-        left: mouse.pageX - width - 20,
-      });
+      // if mouse enters the border move box toward the left.
+      el.style.setProperty("left", String(mouse.pageX - width - 20) +"px")
+
+      // el.css({
+      //   left: mouse.pageX - width - 20,
+      // });
       break;
-      defualt: console.log("Error getting side");
+      // defualt: console.log("Error getting side");
   }
 
   // get the document boundary.
@@ -196,50 +218,38 @@ function moveBox(side, mouseEvent) {
   let boxWidth = elBounds.width;
   let boxHeight = elBounds.height;
 
-  // get the elements position.
-  let elPos = el.position();
-  console.log(elPos);
+  // get the element's postion.
+  let elPos = {
+    top: Number(el.style.top.substring(0, el.style.top.indexOf("px"))),
+    left: Number(el.style.left.substring(0, el.style.left.indexOf("px")))
+  }
 
-  // somehow stop being affected by cursor.
   if (
     elPos.top <= 0 ||
     elPos.left <= 0 ||
     elPos.top >= boundary.docuHeight - boxHeight ||
     elPos.left >= boundary.docuWidth - boxWidth
   ) {
-    console.log("Hit Boundary");
-    el.css({
-      top: boundary.docuHeight / 2,
-      left: boundary.docuWidth / 2,
-    });
+    console.log("Hit Boundary", elPos);
+    el.style.setProperty("top", String(boundary.docuHeight / 2) +"px");
+    el.style.setProperty("left", String(boundary.docuWidth / 2) +"px");
   }
-}
 
-// display the X and Y position of the mouse on a div,
-// can be used for testing purposes.
-function getMouseCoords() {
-  // e is shorthand for event.
-  addEventListener("mousemove", (e) => {
-    let x = e.clientX;
-    let y = e.clientY;
-    // console.log(x,y);
-    $("#mouse-position").html(`( ${x} ), ( ${y} )`);
-    getElementBounds(e);
-  });
-}
+  // get the element's position.
+  // let elPos = el.position();
+  // // console.log(elPos);
 
-// check if the mouse is within range of element return true if it is.
-// checks when mouse enters of leaves the boundary box surrounding the
-// runaway box. Used for testing purposes.
-function checkMouseOver() {
-  let check = false;
-  $("#box-bounds").on("mouseenter", () => {
-    check = true;
-    console.log("Entered:", check);
-  });
-  $("#box-bounds").on("mouseleave", () => {
-    check = false;
-    console.log("Exited should be false:", check);
-  });
-  return check;
+  // // somehow stop being affected by cursor.
+  // if (
+  //   elPos.top <= 0 ||
+  //   elPos.left <= 0 ||
+  //   elPos.top >= boundary.docuHeight - boxHeight ||
+  //   elPos.left >= boundary.docuWidth - boxWidth
+  // ) {
+  //   console.log("Hit Boundary", elPos);
+  //   el.css({
+  //     top: boundary.docuHeight / 2,
+  //     left: boundary.docuWidth / 2,
+  //   });
+  // }
 }
