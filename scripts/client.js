@@ -9,10 +9,10 @@ function onReady(event) {
 
   const box = document.getElementById("box-bounds");
   box.addEventListener("mouseenter", function (event) {
-    getElementBounds(event);
+    moveBox(event);
   });
   box.addEventListener("touchmove", function (event) {
-    getElementBounds(event);
+    moveBox(event);
   });
 }
 
@@ -69,24 +69,17 @@ function getDocumentBorder() {
   return boundary;
 }
 
-// gets the boundaries of the boundary box.
-// needs to check which side of the element the mouse is nearest to,
-// by calculating the distance between the boundaries/sides and the mouse.
-// passes in the mouse event as a parameter.
-function getElementBounds(mouse) {
+// gets the boundaries of the boundary box. needs to check which side of the element the mouse is nearest to,
+// by calculating the distance between the boundaries/sides and the mouse. passes in the mouse event as a parameter.
+function getElementBounds(event) {
   // Have to use vanilla JS to get the box bounds
   // getBoundingClientRect()
   let el = document.getElementById("box-bounds");
   let elBounding = el.getBoundingClientRect();
 
-  // Trying to handle the mobile touch events.
-  if(Array.isArray(mouse)) {
-    mouse = mouse[0];
-  }
-
   // get the X and Y position of the mouse/cursor on the page.
-  let mouseX = mouse.pageX;
-  let mouseY = mouse.pageY;
+  let mouseX = event.pageX;
+  let mouseY = event.pageY;
 
   // distance should just be a few calculations using the
   // above and below variables.
@@ -131,13 +124,16 @@ function getElementBounds(mouse) {
 
   // console.log('***** Closest Side *****');
   // console.log(side);
-
-  // call move box, passing in side and mouse event as parameters.
-  moveBox(side, mouse);
+  return side;
 }
 
 // move the box relative to which side the mouse is closest to it.
-function moveBox(side, event) {
+function moveBox(event) {
+  // Trying to handle the mobile touch events.
+  if(Array.isArray(event)) {
+    event = event[0];
+  }
+
   // get the boundaries of the bounary box.
   let el = document.getElementById('box-bounds');
   let elBoundary = el.getBoundingClientRect();
@@ -149,6 +145,7 @@ function moveBox(side, event) {
 
   // check which side the mouse/cursor is on and
   // move the box accordingly.
+  let side = getElementBounds(event);
   switch (side) {
     case "Top":
       // if mouse enters the border move the box away from top.
