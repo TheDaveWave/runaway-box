@@ -46,32 +46,18 @@ function getDarkMode() {
 
 // gets the bounds of the page to keep the box from trailing off the page.
 function getDocumentBorder() {
-  let d = document;
-  let elBounds = d.getElementById("box-bounds").getBoundingClientRect();
-
-  // still debating on subtracting these from the docX and docY here instead of the check in the moveBox function.
-  let boxWidth = elBounds.width;
-  let boxHeight = elBounds.height;
-
   // get the max width using math.max on every possible way to get the width
   // to improve compatability with different browsers.
   let docX = Math.max(
-    // scrollWidth will get the document's width past the observed document width.
-    // the scrollWidth and scrollHeight extend the boundaries of the document
-    /* d.documentElement.scrollWidth,
-      d.body.scrollWidth, */
-    d.body.offsetWidth,
-    d.documentElement.offsetWidth,
-    d.documentElement.clientWidth
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
   );
   // get the max height.
   let docY = Math.max(
-    // scrollHeight will get the document's width past the observed document height.
-    /*  d.documentElement.scrollHeight,
-      d.body.scrollHeight, */
-    d.body.offsetHeight,
-    d.documentElement.offsetHeight,
-    d.documentElement.clientHeight
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.documentElement.clientHeight
   );
 
   // console.log(docX, docY);
@@ -146,53 +132,46 @@ function getElementBounds(mouse) {
   // console.log('***** Closest Side *****');
   // console.log(side);
 
-  // call move box, passing in side and mouse
-  // event as parameters.
+  // call move box, passing in side and mouse event as parameters.
   moveBox(side, mouse);
 }
 
 // move the box relative to which side the mouse is closest to it.
-function moveBox(side, mouseEvent) {
+function moveBox(side, event) {
   // get the boundaries of the bounary box.
   let el = document.getElementById('box-bounds');
   let elBoundary = el.getBoundingClientRect();
-  let mouse = mouseEvent;
 
   // get the width and height of the boundary box
   // so we can move box knowing how getBoundingClientRect() diagram works.
   let width = elBoundary.width;
   let height = elBoundary.height;
 
-  // get the X and Y position of the mouse on the page.
-  // let mouseX = mouseEvent.pageX;
-  // let mouseY = mouseEvent.pageY;
-
   // check which side the mouse/cursor is on and
   // move the box accordingly.
   switch (side) {
     case "Top":
       // if mouse enters the border move the box away from top.
-      el.style.setProperty("top", String(mouse.pageY + 10) +"px")
+      el.style.setProperty("top", String(event.pageY + 10) +"px")
       break;
     case "Bottom":
       // if mouse enters the border move box towards the top.
-      el.style.setProperty("top", String(mouse.pageY - height - 20) +"px")
+      el.style.setProperty("top", String(event.pageY - height - 20) +"px")
       break;
     case "Left":
       // if mouse enters the border move box away from the left.
-      el.style.setProperty("left", String(mouse.pageX + 10) +"px")
+      el.style.setProperty("left", String(event.pageX + 10) +"px")
       break;
     case "Right":
       // if mouse enters the border move box toward the left.
-      el.style.setProperty("left", String(mouse.pageX - width - 20) +"px")
+      el.style.setProperty("left", String(event.pageX - width - 20) +"px")
       break;
       // defualt: console.log("Error getting side");
   }
 
   // get the document boundary.
   let boundary = getDocumentBorder();
-  let d = document;
-  let elBounds = d.getElementById("box-bounds").getBoundingClientRect();
+  let elBounds = document.getElementById("box-bounds").getBoundingClientRect();
 
   let boxWidth = elBounds.width;
   let boxHeight = elBounds.height;
@@ -203,12 +182,8 @@ function moveBox(side, mouseEvent) {
     left: Number(el.style.left.substring(0, el.style.left.indexOf("px")))
   }
 
-  if (
-    elPos.top <= 0 ||
-    elPos.left <= 0 ||
-    elPos.top >= boundary.docuHeight - boxHeight ||
-    elPos.left >= boundary.docuWidth - boxWidth
-  ) {
+  const positionCheck = elPos.top <= 0 || elPos.left <= 0 || elPos.top >= boundary.docuHeight - boxHeight || elPos.left >= boundary.docuWidth - boxWidth;
+  if (positionCheck) {
     console.log("Hit Boundary", elPos);
     el.style.setProperty("top", String(boundary.docuHeight / 2) +"px");
     el.style.setProperty("left", String(boundary.docuWidth / 2) +"px");
