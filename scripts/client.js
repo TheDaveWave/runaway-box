@@ -17,8 +17,9 @@ function onReady(event) {
 
   // // temporary listener to log the angle of the mouse relative to the box.
   // document.addEventListener("mousemove", function (event) {
-  //   let degrees = getAngle(event);
-  //   console.log("ANGLE:::", degrees);
+  //   console.log("ANGLE:::", getAngle(event));
+  //   // let b = document.getElementById('box-bounds');
+  //   // b.innerText = getAngle(event) + " deg"
   // });
 }
 
@@ -75,160 +76,19 @@ function getDocumentBorder() {
   return boundary;
 }
 
-// // gets the boundaries of the boundary box. needs to check which side of the element the mouse is nearest to,
-// // by calculating the distance between the boundaries/sides and the mouse. passes in the mouse event as a parameter.
-// function getElementBounds(event) {
-//   // Have to use vanilla JS to get the box bounds getBoundingClientRect()
-//   let el = document.getElementById("box-bounds");
-//   let elBounding = el.getBoundingClientRect();
-
-//   // console.log("---- Circular Rect ----", elBounding);
-//   //   {
-//   //     "x": 497,
-//   //     "y": 381,
-//   //     "width": 100,
-//   //     "height": 100,
-//   //     "top": 381,
-//   //     "right": 597,
-//   //     "bottom": 481,
-//   //     "left": 497
-//   // }
-
-//   // rectangle / square: 
-//   //   {
-//   //     "x": 200,
-//   //     "y": 200,
-//   //     "width": 100,
-//   //     "height": 100,
-//   //     "top": 200,
-//   //     "right": 300,
-//   //     "bottom": 300,
-//   //     "left": 200
-//   // }
-
-//   // get the X and Y position of the mouse/cursor on the page.
-//   let mouseX = event.pageX;
-//   let mouseY = event.pageY;
-
-//   // distance should just be a few calculations using the
-//   // above and below variables.
-//   let elTop = elBounding.top;
-//   let elBottom = elBounding.bottom;
-//   let elRight = elBounding.right;
-//   let elLeft = elBounding.left;
-
-//   // calculate the distance from the sides and store
-//   // them in what I will call distance variables.
-//   let distTop = Math.abs(elTop - mouseY);
-//   let distBottom = Math.abs(elBottom - mouseY);
-//   let distRight = Math.abs(elRight - mouseX);
-//   let distLeft = Math.abs(elLeft - mouseX);
-
-//   // get the minimum distance or one of the four distance variables
-//   // that has the shortest distance at any given time.
-//   let distMin = Math.min(distTop, distBottom, distRight, distLeft);
-
-//   // for circle test:
-//   let distObj = { distTop, distBottom, distRight, distLeft }
-//   console.log("--- distance obj ----", distObj);
-
-//   // set side equal to an empty string.
-//   let side = "";
-
-//   // use a switch statement to see which distance variable
-//   // is the closest and assign the side variable a string with the respective side.
-//   switch (distMin) {
-//     case distTop:
-//       side = "Top";
-//       break;
-//     case distBottom:
-//       side = "Bottom";
-//       break;
-//     case distLeft:
-//       side = "Left";
-//       break;
-//     case distRight:
-//       side = "Right";
-//       break;
-//     default:
-//       console.log("error");
-//   }
-
-//   // console.log('***** Closest Side *****');
-//   // console.log(side);
-//   return side;
-// }
-
-// // move the box relative to which side the mouse is closest to it.
-// function moveBox(event) {
-//   // Trying to handle the mobile touch events.
-//   if(Array.isArray(event)) {
-//     event = event[0];
-//   }
-
-//   // get the boundaries of the bounary box.
-//   let el = document.getElementById('box-bounds');
-//   let elBoundary = el.getBoundingClientRect();
-
-//   // get the width and height of the boundary box
-//   // so we can move box knowing how getBoundingClientRect() diagram works.
-//   let width = elBoundary.width;
-//   let height = elBoundary.height;
-
-//   // check which side the mouse/cursor is on and
-//   // move the box accordingly.
-//   let side = getElementBounds(event);
-//   switch (side) {
-//     case "Top":
-//       // if mouse enters the border move the box away from top.
-//       el.style.setProperty("top", String(event.pageY + 10) +"px")
-//       break;
-//     case "Bottom":
-//       // if mouse enters the border move box towards the top.
-//       el.style.setProperty("top", String(event.pageY - height - 20) +"px")
-//       break;
-//     case "Left":
-//       // if mouse enters the border move box away from the left.
-//       el.style.setProperty("left", String(event.pageX + 10) +"px")
-//       break;
-//     case "Right":
-//       // if mouse enters the border move box toward the left.
-//       el.style.setProperty("left", String(event.pageX - width - 20) +"px")
-//       break;
-//       // defualt: console.log("Error getting side");
-//   }
-
-//   // get the document boundary.
-//   let boundary = getDocumentBorder();
-//   let elBounds = document.getElementById("box-bounds").getBoundingClientRect();
-
-//   let boxWidth = elBounds.width;
-//   let boxHeight = elBounds.height;
-
-//   // get the element's postion.
-//   let elPos = {
-//     top: Number(el.style.top.substring(0, el.style.top.indexOf("px"))),
-//     left: Number(el.style.left.substring(0, el.style.left.indexOf("px")))
-//   }
-
-//   const positionCheck = elPos.top <= 0 || elPos.left <= 0 || elPos.top >= boundary.docuHeight - boxHeight || elPos.left >= boundary.docuWidth - boxWidth;
-//   if (positionCheck) {
-//     console.log("Hit Boundary", elPos);
-//     el.style.setProperty("top", String(boundary.docuHeight / 2) +"px");
-//     el.style.setProperty("left", String(boundary.docuWidth / 2) +"px");
-//   }
-// }
-
-
 function getAngle(event) {
-  // get the boundaries of the bounary box.
-  let b = document.getElementById('box-bounds').getBoundingClientRect();
-  let angleRadians = Math.atan2((b.left - event.pageY), (b.top - event.pageX));
-  // let angleRadians = Math.atan2((b.top - event.pageX), (b.left - event.pageY));
-  let degrees = angleRadians * (180 / Math.PI);
-  if(degrees < 0) { degrees += 360 }
+  // get the boundaries of the boundary box.
+  const b = document.getElementById('box-bounds').getBoundingClientRect();
+  // because the top and left values change, the angle calculation changes...
+  // Maybe need to get the absolute center of the element.
+  const x = b.left + b.width / 2;
+  const y = b.top + b.height / 2;
+  const radians = Math.atan2((y - event.pageY), (x - event.pageX));
+  // let radians = Math.atan2((b.top - event.pageX), (b.left - event.pageY));
+  let degree = Math.round(radians * (180 / Math.PI));
+  if(degree < 0) { degree = (degree + 360) % 360 }
   // 0 or 360 degrees is the top left of the box.
-  return Math.floor(degrees);
+  return degree;
 }
 
 // move the box relative to which side the mouse is closest to it.
@@ -274,22 +134,22 @@ function moveBox(event) {
 
   // -------------------------
   // for circle test:
-  let degrees = getAngle(event);
+  const degrees = getAngle(event, elBoundary);
 
   // 0 or 360 degrees is the top left of the box.
-  if(degrees > 0 && degrees < 90) {
-    side = "Top";
-  }
-  if(degrees > 90 && degrees < 180) {
-    side = "Right";
-  }
-  if(degrees > 180 && degrees < 270) {
-    side = "Bottom";
-  }
-  if(degrees > 270 && degrees < 360) {
+  // 45 degrees is top left of box, so 135 is top right
+  if((degrees >= 315 && degrees < 360) || (degrees >= 0 && degrees < 45)) {
     side = "Left";
   }
-  console.log(side, degrees)
+  if(degrees >= 45 && degrees < 135) {
+    side = "Top";
+  }
+  if(degrees >= 135 && degrees < 225) {
+    side = "Right";
+  }
+  if(degrees >= 225 && degrees < 315) {
+    side = "Bottom";
+  }
   // -------------------------
 
   // // use a switch statement to see which distance variable
@@ -316,19 +176,19 @@ function moveBox(event) {
   switch (side) {
     case "Top":
       // if mouse enters the border move the box away from top.
-      el.style.setProperty("top", String(event.pageY + 10) +"px")
+      el.style.setProperty("top", String(event.pageY + 15) +"px")
       break;
     case "Bottom":
       // if mouse enters the border move box towards the top.
-      el.style.setProperty("top", String(event.pageY - height - 20) +"px")
+      el.style.setProperty("top", String(event.pageY - height - 30) +"px")
       break;
     case "Left":
       // if mouse enters the border move box away from the left.
-      el.style.setProperty("left", String(event.pageX + 10) +"px")
+      el.style.setProperty("left", String(event.pageX + 15) +"px")
       break;
     case "Right":
       // if mouse enters the border move box toward the left.
-      el.style.setProperty("left", String(event.pageX - width - 20) +"px")
+      el.style.setProperty("left", String(event.pageX - width - 30) +"px")
       break;
       // defualt: console.log("Error getting side");
   }
@@ -352,6 +212,7 @@ function moveBox(event) {
     el.style.setProperty("top", String(boundary.docuHeight / 2) +"px");
     el.style.setProperty("left", String(boundary.docuWidth / 2) +"px");
   }
+  console.log(getAngle(event))
 }
 
 
