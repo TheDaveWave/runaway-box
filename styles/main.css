@@ -48,7 +48,7 @@ cannot be touched by the mouse/cursor by using a border*/
     /* temporary styling */
     border-style: solid;
     border-color: transparent;
-    border-color: rgba(0, 0, 0, 0.075);
+    /* border-color: rgba(0, 0, 0, 0.075); */
     
     /* Testing a circle */
     /* border-radius: 50%; */
