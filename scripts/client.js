@@ -112,8 +112,8 @@ function moveBox(event) {
   // Assign movement params to the element's style.
   const { pageX, pageY } = event;
   const {top, left, bottom, right} = elBounds;
-  // if(pageX <= left || pageX <= right || pageY <= top || pageY <= bottom) {
+  if(pageX <= left || pageX <= right || pageY <= top || pageY <= bottom) {
     // Object.assign(el.style, {left: String(deltaLeft) +"px", top: String(deltaTop) +"px"});
-  Object.assign(el.style, {left: String(deltaLeft) +"%", top: String(deltaTop) +"%"});
-  // }
+    Object.assign(el.style, {left: String(deltaLeft) +"%", top: String(deltaTop) +"%"});
+  }
 }
