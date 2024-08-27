@@ -1,5 +1,6 @@
 // Vanilla JS solution to running functions on document ready.
 document.addEventListener("DOMContentLoaded", (event) => onReady(event));
+let isMobile = false;
 
 // Functions to run on Document load.
 function onReady(event) {
@@ -7,11 +8,16 @@ function onReady(event) {
   const border = getDocumentBorder();
   console.log(`Document Border - x: ${border.docuWidth}, y: ${border.docuHeight}`);
   const box = document.getElementById("box-bounds");
-  box.addEventListener("mouseenter", function (event) {
-    moveBox(event);
-  });
-  box.addEventListener("touchmove", function (event) {
-    moveBox(event);
+  isMobile = detectMobile();
+  box.addEventListener("pointerenter",(event)=>{
+    moveBox(event)
+  })
+}
+
+function detectMobile() {
+  const toMatch = [/Android/i,/webOS/i,/iPhone/i,/iPad/i,/iPod/i,/BlackBerry/i,/Windows Phone/i];
+  return toMatch.some((toMatchItem) => {
+      return navigator.userAgent.match(toMatchItem);
   });
 }
 
@@ -57,25 +63,12 @@ function getAngle(event) {
 }
 
 // need to figure out how to use the angle to move the box in the opposite direction. Back to algebra class...
-// function getMovementParams(element, event, pixels = 20) {
-//   const angle = getAngle(event);
-//   const radians = angle * (Math.PI / 180);
-//   const deltaX = Math.round(Math.cos(radians) * pixels);
-//   const deltaY = Math.round(Math.sin(radians) * pixels);
-//   // const deltaLeft = Number(element.style.left.substring(0, element.style.left.indexOf("px"))) + deltaX;
-//   // const deltaTop = Number(element.style.top.substring(0, element.style.top.indexOf("px"))) + deltaY;
-//   const deltaLeft = Math.ceil((Number(element.style.left.substring(0, element.style.left.indexOf("%"))) + deltaX) / 100);
-//   const deltaTop = Math.ceil((Number(element.style.top.substring(0, element.style.top.indexOf("%"))) + deltaY) / 100);
-//   return {deltaLeft, deltaTop};
-// }
-
-function getMovementParams(element, event, percent = 2) {
+function getMovementParams(element, event, percent = 3) {
+  if(isMobile) { percent = 5; }
   const angle = getAngle(event);
   const radians = angle * (Math.PI / 180);
   const deltaX = Math.round(Math.cos(radians) * percent);
   const deltaY = Math.round(Math.sin(radians) * percent);
-  // const deltaLeft = Number(element.style.left.substring(0, element.style.left.indexOf("px"))) + deltaX;
-  // const deltaTop = Number(element.style.top.substring(0, element.style.top.indexOf("px"))) + deltaY;
   const deltaLeft = Number(element.style.left.substring(0, element.style.left.indexOf("%"))) + deltaX;
   const deltaTop = Number(element.style.top.substring(0, element.style.top.indexOf("%"))) + deltaY;
   return {deltaLeft, deltaTop};
@@ -100,7 +93,8 @@ function moveBox(event) {
     left: Number(el.style.left.substring(0, el.style.left.indexOf("%")))
   }
   // will need to get the position of the box and makes sure it does not go past (0,0), (0, max height), (max width, 0), (max width, max height).
-  const boundaryHeight = 100 - Math.round((boxHeight / boundary.docuHeight) * 100);
+  let boundaryHeight = 100 - Math.round((boxHeight / boundary.docuHeight) * 100);
+  if(isMobile) { boundaryHeight = boundaryHeight - 10 }
   const bounaryWidth = 100 - Math.round((boxWidth / boundary.docuWidth) * 100);
   const positionCheck = elPos.top <= 0 || elPos.left <= 0 || elPos.top >= boundaryHeight || elPos.left >= bounaryWidth;
   if (positionCheck) {
