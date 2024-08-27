@@ -57,13 +57,27 @@ function getAngle(event) {
 }
 
 // need to figure out how to use the angle to move the box in the opposite direction. Back to algebra class...
-function getMovementParams(element, event, pixels = 20) {
+// function getMovementParams(element, event, pixels = 20) {
+//   const angle = getAngle(event);
+//   const radians = angle * (Math.PI / 180);
+//   const deltaX = Math.round(Math.cos(radians) * pixels);
+//   const deltaY = Math.round(Math.sin(radians) * pixels);
+//   // const deltaLeft = Number(element.style.left.substring(0, element.style.left.indexOf("px"))) + deltaX;
+//   // const deltaTop = Number(element.style.top.substring(0, element.style.top.indexOf("px"))) + deltaY;
+//   const deltaLeft = Math.ceil((Number(element.style.left.substring(0, element.style.left.indexOf("%"))) + deltaX) / 100);
+//   const deltaTop = Math.ceil((Number(element.style.top.substring(0, element.style.top.indexOf("%"))) + deltaY) / 100);
+//   return {deltaLeft, deltaTop};
+// }
+
+function getMovementParams(element, event, percent = 2) {
   const angle = getAngle(event);
   const radians = angle * (Math.PI / 180);
-  const deltaX = Math.round(Math.cos(radians) * pixels);
-  const deltaY = Math.round(Math.sin(radians) * pixels);
-  const deltaLeft = Number(element.style.left.substring(0, element.style.left.indexOf("px"))) + deltaX;
-  const deltaTop = Number(element.style.top.substring(0, element.style.top.indexOf("px"))) + deltaY;
+  const deltaX = Math.round(Math.cos(radians) * percent);
+  const deltaY = Math.round(Math.sin(radians) * percent);
+  // const deltaLeft = Number(element.style.left.substring(0, element.style.left.indexOf("px"))) + deltaX;
+  // const deltaTop = Number(element.style.top.substring(0, element.style.top.indexOf("px"))) + deltaY;
+  const deltaLeft = Number(element.style.left.substring(0, element.style.left.indexOf("%"))) + deltaX;
+  const deltaTop = Number(element.style.top.substring(0, element.style.top.indexOf("%"))) + deltaY;
   return {deltaLeft, deltaTop};
 }
 
@@ -82,21 +96,24 @@ function moveBox(event) {
   let boxHeight = elBounds.height;
   // get the element's postion.
   let elPos = {
-    top: Number(el.style.top.substring(0, el.style.top.indexOf("px"))),
-    left: Number(el.style.left.substring(0, el.style.left.indexOf("px")))
+    top: Number(el.style.top.substring(0, el.style.top.indexOf("%"))),
+    left: Number(el.style.left.substring(0, el.style.left.indexOf("%")))
   }
   // will need to get the position of the box and makes sure it does not go past (0,0), (0, max height), (max width, 0), (max width, max height).
-  const positionCheck = elPos.top <= 0 || elPos.left <= 0 || elPos.top >= boundary.docuHeight - boxHeight || elPos.left >= boundary.docuWidth - boxWidth;
+  const boundaryHeight = 100 - Math.round((boxHeight / boundary.docuHeight) * 100);
+  const bounaryWidth = 100 - Math.round((boxWidth / boundary.docuWidth) * 100);
+  const positionCheck = elPos.top <= 0 || elPos.left <= 0 || elPos.top >= boundaryHeight || elPos.left >= bounaryWidth;
   if (positionCheck) {
     console.log("Hit Boundary", elPos);
-    Object.assign(el.style, {left: String(boundary.docuWidth / 2) +"px", top: String(boundary.docuHeight / 2) +"px"});
+    Object.assign(el.style, {left: "50%", top: "50%"});
   }
   // GET THIS TO RUN ON A FAKE COOKIE PREFERENCES BUTTON.
   const {deltaLeft, deltaTop} = getMovementParams(el, event);
   // Assign movement params to the element's style.
   const { pageX, pageY } = event;
   const {top, left, bottom, right} = elBounds;
-  if(pageX <= left || pageX <= right || pageY <= top || pageY <= bottom) {
-    Object.assign(el.style, {left: String(deltaLeft) +"px", top: String(deltaTop) +"px"});
-  }
+  // if(pageX <= left || pageX <= right || pageY <= top || pageY <= bottom) {
+    // Object.assign(el.style, {left: String(deltaLeft) +"px", top: String(deltaTop) +"px"});
+  Object.assign(el.style, {left: String(deltaLeft) +"%", top: String(deltaTop) +"%"});
+  // }
 }
