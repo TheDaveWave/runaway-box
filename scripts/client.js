@@ -169,32 +169,3 @@ function moveBox(event) {
     el.style.setProperty("left", String(boundary.docuWidth / 2) +"px");
   }
 }
-
-
-
-
-
-
-
-// let distObj = { distTop, distBottom, distRight, distLeft }
-// // console.log("--- distance obj ----", distObj);
-// // try to get circular bounds?
-// // need a radius?
-// let radius = height / 2;
-// let circleArea = Math.floor(Math.PI * Math.pow(radius, 2));
-// let circlePerimeter = Math.floor(2 * Math.PI * radius);
-
-// // Math.degrees = function(radians) {
-// //   return radians * (180 / Math.PI);
-// // }
-
-// // elTop - mouseY
-// // elLeft - mouseX
-// let val1 = elTop - mouseX
-// let val2 = elLeft - mouseY
-// let dist = Math.sqrt((val1 * val1) + (val2 * val2)); //hypotenuse
-// let aSine = Math.asin(val1 / dist);
-// let angleRadians = Math.atan2(val2, val1);
-// let degrees = angleRadians * (180 / Math.PI);
-// let circleBounds = { radius, area: circleArea, perimeter: circlePerimeter, degrees }
-// // console.log("---- circleBounds ----", circleBounds)
