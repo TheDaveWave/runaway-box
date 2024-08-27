@@ -129,9 +129,6 @@ function moveBox(event) {
   // that has the shortest distance at any given time.
   let distMin = Math.min(distTop, distBottom, distRight, distLeft);
 
-  // set side equal to an empty string.
-  let side = "";
-
   // -------------------------
   // for circle test:
   const degrees = getAngle(event, elBoundary);
@@ -139,59 +136,18 @@ function moveBox(event) {
   // 0 or 360 degrees is the top left of the box.
   // 45 degrees is top left of box, so 135 is top right
   if((degrees >= 315 && degrees < 360) || (degrees >= 0 && degrees < 45)) {
-    side = "Left";
+    el.style.setProperty("left", String(event.pageX + 15) +"px")
   }
   if(degrees >= 45 && degrees < 135) {
-    side = "Top";
+    el.style.setProperty("top", String(event.pageY + 15) +"px")
   }
   if(degrees >= 135 && degrees < 225) {
-    side = "Right";
+    el.style.setProperty("left", String(event.pageX - width - 30) +"px")
   }
   if(degrees >= 225 && degrees < 315) {
-    side = "Bottom";
+    el.style.setProperty("top", String(event.pageY - height - 30) +"px")
   }
   // -------------------------
-
-  // // use a switch statement to see which distance variable
-  // // is the closest and assign the side variable a string with the respective side.
-  // switch (distMin) {
-  //   case distTop:
-  //     side = "Top";
-  //     break;
-  //   case distBottom:
-  //     side = "Bottom";
-  //     break;
-  //   case distLeft:
-  //     side = "Left";
-  //     break;
-  //   case distRight:
-  //     side = "Right";
-  //     break;
-  //   default:
-  //     console.log("error");
-  // }
-
-
-  // before combining functions:
-  switch (side) {
-    case "Top":
-      // if mouse enters the border move the box away from top.
-      el.style.setProperty("top", String(event.pageY + 15) +"px")
-      break;
-    case "Bottom":
-      // if mouse enters the border move box towards the top.
-      el.style.setProperty("top", String(event.pageY - height - 30) +"px")
-      break;
-    case "Left":
-      // if mouse enters the border move box away from the left.
-      el.style.setProperty("left", String(event.pageX + 15) +"px")
-      break;
-    case "Right":
-      // if mouse enters the border move box toward the left.
-      el.style.setProperty("left", String(event.pageX - width - 30) +"px")
-      break;
-      // defualt: console.log("Error getting side");
-  }
 
   // get the document boundary.
   let boundary = getDocumentBorder();
@@ -212,7 +168,6 @@ function moveBox(event) {
     el.style.setProperty("top", String(boundary.docuHeight / 2) +"px");
     el.style.setProperty("left", String(boundary.docuWidth / 2) +"px");
   }
-  console.log(getAngle(event))
 }
 
 
