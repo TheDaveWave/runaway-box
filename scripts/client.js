@@ -91,6 +91,10 @@ function getAngle(event) {
   return degree;
 }
 
+function getCartesianCoords(degrees, num) {
+  return {x: Math.round(num * Math.cos(degrees)), y: Math.round(num * Math.sin(degrees))}
+}
+
 // move the box relative to which side the mouse is closest to it.
 function moveBox(event) {
   // Trying to handle the mobile touch events.
@@ -98,7 +102,7 @@ function moveBox(event) {
     event = event[0];
   }
 
-  // get the boundaries of the bounary box.
+  // get the boundaries of the boundary box.
   let el = document.getElementById('box-bounds');
   let elBoundary = el.getBoundingClientRect();
 
@@ -129,25 +133,39 @@ function moveBox(event) {
   // that has the shortest distance at any given time.
   let distMin = Math.min(distTop, distBottom, distRight, distLeft);
 
-  // -------------------------
-  // for circle test:
   const degrees = getAngle(event);
 
-  // 0 or 360 degrees is the top left of the box.
   // 45 degrees is top left of box, so 135 is top right
-  if((degrees >= 315 && degrees < 360) || (degrees >= 0 && degrees < 45)) {
-    el.style.setProperty("left", String(event.pageX + 15) +"px")
+  // need to figure out how to use the angle to move the box in the opposite direction. Back to algebra class...
+  // gotta multiply the movement amount by the math.whatever
+  // GET THIS TO RUN ON A FAKE COOKIE PREFERENCES BUTTON.
+
+  if((degrees >= 225 && degrees < 315) || (degrees >= 135 && degrees < 225)) {
+    const {x, y} = getCartesianCoords(degrees, 30);
+    console.log(x, y);
+    Object.assign(el.style, {top:  String(event.pageY - height - Math.abs(y)) +"px", left: String(event.pageX - width - Math.abs(x)) +"px"});
+  } else {
+    const {x, y} = getCartesianCoords(degrees, 15);
+    console.log(x, y);
+    Object.assign(el.style, {top: String(event.pageY + Math.abs(y)) +"px", left: String(event.pageX + Math.abs(x)) +"px"});
   }
-  if(degrees >= 45 && degrees < 135) {
-    el.style.setProperty("top", String(event.pageY + 15) +"px")
-  }
-  if(degrees >= 135 && degrees < 225) {
-    el.style.setProperty("left", String(event.pageX - width - 30) +"px")
-  }
-  if(degrees >= 225 && degrees < 315) {
-    el.style.setProperty("top", String(event.pageY - height - 30) +"px")
-  }
-  // -------------------------
+
+  // if((degrees >= 315 && degrees < 360) || (degrees >= 0 && degrees < 45)) {
+  //   console.log(x, y)
+  //   el.style.setProperty("left", String(event.pageX + 15) +"px");
+  // }
+  // if(degrees >= 45 && degrees < 135) {
+  //   console.log(x, y)
+  //   el.style.setProperty("top", String(event.pageY + 15) +"px");
+  // }
+  // if(degrees >= 135 && degrees < 225) {
+  //   console.log(x, y)
+  //   el.style.setProperty("left", String(event.pageX - width - 30) +"px");
+  // }
+  // if(degrees >= 225 && degrees < 315) {
+  //   console.log(x, y)
+  //   el.style.setProperty("top", String(event.pageY - height - 30) +"px");
+  // }
 
   // get the document boundary.
   let boundary = getDocumentBorder();
