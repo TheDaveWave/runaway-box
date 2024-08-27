@@ -131,7 +131,7 @@ function moveBox(event) {
 
   // -------------------------
   // for circle test:
-  const degrees = getAngle(event, elBoundary);
+  const degrees = getAngle(event);
 
   // 0 or 360 degrees is the top left of the box.
   // 45 degrees is top left of box, so 135 is top right
