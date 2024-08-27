@@ -76,7 +76,7 @@ function moveBox(event) {
   // get the boundaries of the boundary box.
   const el = document.getElementById('box-bounds');
   // GET THIS TO RUN ON A FAKE COOKIE PREFERENCES BUTTON.
-  const {deltaLeft, deltaTop} = getMovementParams(event);
+  const {deltaLeft, deltaTop} = getMovementParams(el, event);
   // Assign movement params to the element's style.
   Object.assign(el.style, {left: String(deltaLeft) +"px", top: String(deltaTop) +"px"});
   // get the document boundary.
