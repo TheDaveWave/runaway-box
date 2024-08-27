@@ -75,10 +75,6 @@ function moveBox(event) {
   }
   // get the boundaries of the boundary box.
   const el = document.getElementById('box-bounds');
-  // GET THIS TO RUN ON A FAKE COOKIE PREFERENCES BUTTON.
-  const {deltaLeft, deltaTop} = getMovementParams(el, event);
-  // Assign movement params to the element's style.
-  Object.assign(el.style, {left: String(deltaLeft) +"px", top: String(deltaTop) +"px"});
   // get the document boundary.
   let boundary = getDocumentBorder();
   let elBounds = document.getElementById("box-bounds").getBoundingClientRect();
@@ -94,5 +90,13 @@ function moveBox(event) {
   if (positionCheck) {
     console.log("Hit Boundary", elPos);
     Object.assign(el.style, {left: String(boundary.docuWidth / 2) +"px", top: String(boundary.docuHeight / 2) +"px"});
+  }
+  // GET THIS TO RUN ON A FAKE COOKIE PREFERENCES BUTTON.
+  const {deltaLeft, deltaTop} = getMovementParams(el, event);
+  // Assign movement params to the element's style.
+  const { pageX, pageY } = event;
+  const {top, left, bottom, right} = elBounds;
+  if(pageX <= left || pageX <= right || pageY <= top || pageY <= bottom) {
+    Object.assign(el.style, {left: String(deltaLeft) +"px", top: String(deltaTop) +"px"});
   }
 }
